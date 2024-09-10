@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Website with Dark/Light Mode</title>
+    
+    <!-- Font Awesome CDN Link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* Global Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .light-mode {
+            background-color: white;
+            color: black;
+        }
+
+        .dark-mode {
+            background-color: #222;
+            color: #fff;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #c579a3;
+            padding: 10px 20px;
+            position: relative;
+        }
+
+        .navbar h1 {
+            margin: 0;
+            color: white;
+            font-size: 24px;
+        }
+
+        .navbar ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            margin-left: auto;
+        }
+
+        .navbar ul li {
+            margin-left: 15px;
+        }
+
+        .navbar ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Hide icons for large screens */
+        .navbar ul li a i {
+            display: none;
+        }
+
+        /* Toggle Button Styles */
+        .toggle-button {
+            padding: 8px 16px;
+            background-color: #ff9800;
+            border: none;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+        }
+
+        .toggle-button:hover {
+            background-color: #e68900;
+        }
+
+        /* Hamburger Menu Styles */
+        .hamburger {
+            display: none;
+            font-size: 24px;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .navbar ul {
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                right: 0;
+                background-color: #c579a3;
+                width: 200px;
+                display: none;
+                border-radius: 5px;
+                padding: 10px 0;
+            }
+
+            .navbar ul.show {
+                display: flex;
+            }
+
+            .navbar ul li {
+                margin: 10px 0;
+                text-align: center;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .toggle-button {
+                font-size: 14px;
+            }
+
+            /* Show icons for small screens */
+            .navbar ul li a i {
+                display: inline-block;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar h1 {
+                font-size: 20px;
+            }
+
+            .navbar ul li a {
+                font-size: 14px;
+            }
+
+            .navbar ul li a i {
+                font-size: 16px;
+            }
+
+            /* Align hamburger and toggle side by side */
+            .navbar {
+                justify-content: space-between;
+            }
+
+            .hamburger, .toggle-button {
+                display: flex;
+                margin-left: auto;
+                align-items: center;
+            }
+
+            .hamburger {
+                margin-left: 5px; /* Reduced margin */
+            }
+
+            .toggle-button {
+                padding: 8px 12px; /* Reduced padding for smaller size */
+            }
+        }
+    </style>
+</head>
+<body class="light-mode">
+    <header class="navbar">
+        <h1>DPM</h1>
+        <nav>
+            <ul id="navbarLinks">
+                <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="#"><i class="fas fa-info-circle"></i> About</a></li>
+                <li><a href="#"><i class="fas fa-envelope"></i> Contact</a></li>
+                <li><a href="#"><i class="fas fa-adjust"></i> Toggle Mode</a></li>
+            </ul>
+        </nav>
+        <button class="toggle-button" id="toggleMode">
+            <i class="fas fa-sun"></i> 
+        </button>
+        <i class="fas fa-bars hamburger" id="menuToggle"></i>
+    </header>
+
+    <main>
+        <section>
+            <h2>Welcome to My Website</h2>
+            <p>This is a sample website with a responsive navigation bar and dark/light mode toggle.</p>
+        </section>
+    </main>
+
+    <script>
+        const toggleButton = document.getElementById('toggleMode');
+        const body = document.body;
+        const navbar = document.getElementById('navbarLinks');
+        const menuToggle = document.getElementById('menuToggle');
+
+        toggleButton.addEventListener('click', function() {
+            if (body.classList.contains('light-mode')) {
+                body.classList.replace('light-mode', 'dark-mode');
+                toggleButton.innerHTML = '<i class="fas fa-moon"></i>';
+            } else {
+                body.classList.replace('dark-mode', 'light-mode');
+                toggleButton.innerHTML = '<i class="fas fa-sun"></i>';
+            }
+        });
+
+        // Function to handle responsive menu toggle
+        menuToggle.addEventListener('click', () => {
+            navbar.classList.toggle('show');
+        });
+    </script>
+</body>
+</html>
